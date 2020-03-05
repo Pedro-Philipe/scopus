@@ -49,7 +49,12 @@ error_reporting(0);
         }
 
         if(preg_match('/PUBLISHER:/', $value)){
-            $dadoLimpo[$iRegistro]['SO'] = explode(":i ", $value)[1];
+            $dadoLimpo[$iRegistro]['SO'] = explode(": ", $value)[1];
+        }
+
+        if(preg_match('/AFFILIATIONS:/', $value)){
+            $dadoLimpo[$iRegistro]['C1'] = explode(": ", $value)[1];
+            $dadoLimpo[$iRegistro]['C1'] = explode(';', $dadoLimpo[$iRegistro]['C1'])[0];
         }
 
         if(preg_match('/REFERENCES:/', $value)){
@@ -71,7 +76,7 @@ var_dump($autorEmLinha);
             $dadoLimpo[$iRegistro]['SO'] = explode(":i ", $value)[1];
 
             #$teste['teste'][] = $ano[0][0];
-	    //$teste['teste'] = preg_match_all("/[A-Z][a-z]{1,30}, [A-Z]{1}.(,|[A-Z].,|-[A-Z],)/",) 
+	    //$teste['teste'] = preg_match_all("/[A-Z][a-z]{1,30}, [A-Z]{1}.(,|[A-Z].,|-[A-Z],)/",)
             $dadoLimpo[$iRegistro]['SO'] = explode(": ", $value)[1];
 */
         }
@@ -121,11 +126,14 @@ var_dump($autorEmLinha);
         if(array_key_exists('DE', $value)){
             $publicacao .= 'DE ' . trim($value['DE']) . "\r\n";
         }
+
         if(array_key_exists('AB', $value)){
             $publicacao .= 'AB ' . trim($value['AB']) . "\r\n";
         }
 
-	var_dump($value['CR']);
+        if(array_key_exists('C1', $value)){
+            $publicacao .= 'C1 ' . $value['C1'] . "\r\n";
+        }
 
         $publicacao .= 'TI ' . trim($value['TI']) . "\r\n";
         $publicacao .= 'LA ' . trim($value['LA']) . "\r\n";
