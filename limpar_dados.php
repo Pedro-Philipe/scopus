@@ -8,7 +8,6 @@ error_reporting(0);
 
     $iRegistro = 0;
     $dadoLimpo = [];
-    $teste = [];
     $proximasLinhasReferencias = false;
     foreach($dados as $key => $value){
 
